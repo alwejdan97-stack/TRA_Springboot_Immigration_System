@@ -15,7 +15,7 @@ import java.util.List;
 public class Applicant extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private String passportNumber;
     private String nationality;
     private Boolean criminalRecord;
