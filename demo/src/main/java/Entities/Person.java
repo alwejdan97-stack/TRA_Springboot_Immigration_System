@@ -2,11 +2,11 @@ package Entities;
 
 
 public class Person {
-    String firstName;
-    String lastName;
-    String gender;
-    String phoneNumber;
-    String email;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private String phoneNumber;
+    private String email;
 
     public Person(String firstName, String lastName, String gender, String phoneNumber, String email) {
         this.firstName = firstName;
@@ -54,5 +54,16 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
