@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "ImmigrationOfficer")
 public class ImmigrationOfficer extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
