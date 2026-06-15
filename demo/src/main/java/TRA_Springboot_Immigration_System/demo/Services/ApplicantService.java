@@ -24,10 +24,10 @@ public class ApplicantService {
     }
 
     //create and save a new applicant object from strings
-    public List<Applicant> saveApplicant(String firstName, String lastName, String passportNumber, String nationality)throws Exception{
+    public List<Applicant> saveApplicant(String firstName, String lastName, String passportNumber, String nationality)throws RuntimeException{
         List<Applicant> applicants=new ArrayList<>();
         if(passportNumber==null || passportNumber.isEmpty()){
-            throw new Exception("Passport Number Can't be Null");
+            throw new RuntimeException("Passport Number Can't be Null");
         }
         for(Applicant a:applicants){
             if(!a.getFirstName().equalsIgnoreCase(firstName) && !a.getLastName().equalsIgnoreCase(lastName)){
@@ -38,9 +38,21 @@ public class ApplicantService {
                 applicantRepository.save(a);
             }
             else{
-                throw new Exception("Applicant Name is Already Exist...");
+                throw new RuntimeException("Applicant Name is Already Exist...");
             }
         }
         return applicants;
+    }
+
+    //find applicant using criminalRecord
+    public Applicant flagCriminalRecord(Long applicantId)throws RuntimeException{
+        List<Applicant> applicants=new ArrayList<>();
+        for(Applicant a:applicants){
+            if(applicantRepository.existsById(applicantId)){
+                a.setCriminalRecord(true);
+                return applicantRepository.findApplicantById(applicantId);
+            }
+        }
+        throw new RuntimeException("Applicant With ID "+applicantId+" NOT Found...");
     }
 }
