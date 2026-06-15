@@ -20,7 +20,7 @@ public class Applicant extends Person{
     private Boolean criminalRecord;
 
    @OneToMany
-    private List<VisApplications> visApplicationsList;
+    private List<VisaApplications> visApplicationsList;
 
     @OneToMany
     private List<Interviews> interviewsListnterviews;
