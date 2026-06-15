@@ -18,6 +18,10 @@ public abstract class Person {
         this.email = email;
     }
 
+    public Person() {
+        super();
+    }
+
     public String getFirstName() {
         return firstName;
     }

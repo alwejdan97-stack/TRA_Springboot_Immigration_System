@@ -1,16 +1,14 @@
 package Entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Applicant extends Person{
     @Id
@@ -20,7 +18,7 @@ public class Applicant extends Person{
     private String nationality;
     private Boolean criminalRecord;
 
-    @OneToMany
+   @OneToMany
     private List<VisApplications> visApplicationsList;
 
     @OneToMany
