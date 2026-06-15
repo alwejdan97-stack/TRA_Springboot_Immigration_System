@@ -1,6 +1,8 @@
 package Entities;
 
+import jakarta.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public class Person {
     private String firstName;
     private String lastName;
