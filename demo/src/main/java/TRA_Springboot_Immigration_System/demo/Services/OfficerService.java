@@ -7,6 +7,8 @@ import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OfficerService {
     OfficerRepository officerRepository;
@@ -42,4 +44,19 @@ public class OfficerService {
         }
         throw new RuntimeException("Officer ID NOT Found...");
     }
+
+    public List<ImmigrationOfficer> findByRank(String rank)throws RuntimeException{
+        if(rank!=null || !rank.isEmpty()){
+            return officerRepository.findByRank(rank);
+        }
+        throw new RuntimeException("Invalid Data...");
+    }
+
+    public List<ImmigrationOfficer> findByRank(String rank, int minimumClearanceLevel){
+        if(rank!=null || !rank.isEmpty()){
+            return officerRepository.findByRank(rank,minimumClearanceLevel);
+        }
+        throw new RuntimeException("Invalid Data...");
+    }
+
 }
