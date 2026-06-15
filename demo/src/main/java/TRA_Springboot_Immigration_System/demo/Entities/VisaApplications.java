@@ -1,8 +1,6 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,14 +13,20 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "VisaApplications")
 public class VisaApplications {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String visaType;
     private String status;
     private String officerNotes;
 
     @ManyToOne
-    private List<ImmigrationOfficer> handlingOfficer;
+    @JoinColumn(name = "officer_id")
+
+    private ImmigrationOfficer handlingOfficer;
 
     @ManyToOne
-    private List<Applicant> applicant;
+    @JoinColumn(name = "applicant_id")
+    private Applicant applicant;
 }

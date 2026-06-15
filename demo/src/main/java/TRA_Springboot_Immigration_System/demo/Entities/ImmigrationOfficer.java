@@ -1,4 +1,4 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,12 +18,14 @@ public class ImmigrationOfficer extends Person{
     private long id;
 
     private String badgeNumber;
+    @Column(name = "officerRank")
     private String rank;
     private int clearanceLevel;
     private Boolean active;
 
     @ManyToOne
-    private List<ImmigrationCenter> immigrationCenter;
+    @JoinColumn(name = "center_id")
+    private ImmigrationCenter immigrationCenter;
 
     @OneToMany
     private List<Interview> interview;

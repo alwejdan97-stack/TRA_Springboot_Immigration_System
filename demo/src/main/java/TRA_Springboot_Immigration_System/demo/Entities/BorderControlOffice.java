@@ -1,4 +1,4 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "BorderControlOffice")
 public class BorderControlOffice extends ImmigrationOfficer {
     private String assignedCheckPoint;
     private Boolean k9UnitAssigned;

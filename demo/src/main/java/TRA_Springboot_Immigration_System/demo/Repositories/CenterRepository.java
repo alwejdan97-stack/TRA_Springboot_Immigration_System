@@ -1,8 +1,6 @@
-package Repositories;
+package TRA_Springboot_Immigration_System.demo.Repositories;
 
-import Entities.Applicant;
-import Entities.ImmigrationCenter;
-import Entities.VisaApplications;
+import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationCenter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

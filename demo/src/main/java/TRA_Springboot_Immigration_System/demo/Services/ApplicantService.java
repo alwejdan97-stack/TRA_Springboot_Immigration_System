@@ -1,8 +1,8 @@
-package Services;
+package TRA_Springboot_Immigration_System.demo.Services;
 
 
-import Entities.Applicant;
-import Repositories.ApplicantRepository;
+import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
+import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

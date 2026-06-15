@@ -1,4 +1,4 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Table(name = "Applicant")
 public class Applicant extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Applicant extends Person{
     private Boolean criminalRecord;
 
    @OneToMany
-    private List<VisaApplications> visApplicationsList;
+    private List<VisaApplications> visApplications;
 
     @OneToMany
     private List<Interview> interviews;

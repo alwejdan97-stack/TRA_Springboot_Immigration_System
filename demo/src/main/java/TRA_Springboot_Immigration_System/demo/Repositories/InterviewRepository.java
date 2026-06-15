@@ -1,7 +1,6 @@
-package Repositories;
+package TRA_Springboot_Immigration_System.demo.Repositories;
 
-import Entities.Applicant;
-import Entities.Interview;
+import TRA_Springboot_Immigration_System.demo.Entities.Interview;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

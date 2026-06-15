@@ -1,4 +1,4 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
 import jakarta.persistence.MappedSuperclass;
 

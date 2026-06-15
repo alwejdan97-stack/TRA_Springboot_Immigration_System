@@ -1,8 +1,6 @@
-package Entities;
+package TRA_Springboot_Immigration_System.demo.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "ImmigrationCenter")
 public class ImmigrationCenter {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String name;
     private String locationCountry;
     private String type;

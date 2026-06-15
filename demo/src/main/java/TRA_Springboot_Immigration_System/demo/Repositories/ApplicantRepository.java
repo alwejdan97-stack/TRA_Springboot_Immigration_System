@@ -1,6 +1,6 @@
-package Repositories;
+package TRA_Springboot_Immigration_System.demo.Repositories;
 
-import Entities.Applicant;
+import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
