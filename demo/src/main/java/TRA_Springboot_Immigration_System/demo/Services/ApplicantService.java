@@ -12,9 +12,9 @@ import java.util.List;
 @Service
 public class ApplicantService {
     ApplicantRepository applicantRepository;
+    public static List<Applicant> applicants=new ArrayList<>();
 
     @Autowired
-
     public ApplicantService(ApplicantRepository applicantRepository) {
         this.applicantRepository = applicantRepository;
     }
@@ -25,12 +25,11 @@ public class ApplicantService {
 
     //create and save a new applicant object from strings
     public List<Applicant> saveApplicant(String firstName, String lastName, String passportNumber, String nationality)throws RuntimeException{
-        List<Applicant> applicants=new ArrayList<>();
         if(passportNumber==null || passportNumber.isEmpty()){
             throw new RuntimeException("Passport Number Can't be Null");
         }
         for(Applicant a:applicants){
-            if(!a.getFirstName().equalsIgnoreCase(firstName) && !a.getLastName().equalsIgnoreCase(lastName)){
+            if(!applicantRepository.existFirstNameLastName(firstName,lastName)){
                 a.setFirstName(firstName);
                 a.setLastName(lastName);
                 a.setPassportNumber(passportNumber);
@@ -46,7 +45,6 @@ public class ApplicantService {
 
     //find applicant using criminalRecord
     public Applicant flagCriminalRecord(Long applicantId)throws RuntimeException{
-        List<Applicant> applicants=new ArrayList<>();
         for(Applicant a:applicants){
             if(applicantRepository.existsById(applicantId)){
                 a.setCriminalRecord(true);
