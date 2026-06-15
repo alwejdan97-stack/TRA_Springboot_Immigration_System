@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface OfficerRepository extends JpaRepository<ImmigrationOfficer,Long> {
     List<ImmigrationOfficer> findByOfficeId(Long officeId);
+    List<ImmigrationOfficer> findByBadgeNumber(String badgeNumber);
 }

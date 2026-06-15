@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface VisaApplicationsRepository extends JpaRepository<VisaApplications,Long> {
-    List<VisaApplications> findByApplicantId(Long applicantId);
+    List<VisaApplications> findByVisaApplicantId(Long applicantId);
+    List<VisaApplications> findByVisaApplicantStatus(String status);
 }
