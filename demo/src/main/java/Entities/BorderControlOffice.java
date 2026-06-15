@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BorderControlOffice extends ImmegrationOfficer{
+public class BorderControlOffice extends ImmigrationOfficer {
     private String assignedCheckPoint;
     private Boolean k9UnitAssigned;
 }

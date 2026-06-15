@@ -10,17 +10,17 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class VisaApplications {
+@NoArgsConstructor
+public class Interview {
     private long id;
-    private String visaType;
+    private String interviewDate;
     private String status;
-    private String officerNotes;
-
-    @ManyToOne
-    private List<ImmigrationOfficer> handlingOfficer;
+    private String purpose;
 
     @ManyToOne
     private List<Applicant> applicant;
+
+    @ManyToOne
+    private List<ImmigrationOfficer> officer;
 }

@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImmegrationOfficer extends Person{
+public class ImmigrationOfficer extends Person{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,8 +22,8 @@ public class ImmegrationOfficer extends Person{
     private Boolean active;
 
     @ManyToOne
-    private List<Center> centerList;
+    private List<ImmigrationCenter> immigrationCenter;
 
     @OneToMany
-    private List<Interview> interviewList;
+    private List<Interview> interview;
 }
