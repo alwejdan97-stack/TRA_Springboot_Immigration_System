@@ -43,20 +43,30 @@ public class VisaApplicationsService {
         return visaApplicationsRepository.save(application);
     }
 
-    /*public ImmigrationOfficer assignedOfficer(Long visaId, Long officerId){
+    public VisaApplications assignedOfficer(Long visaId, Long officerId){
         VisaApplications application=visaApplicationsRepository.findById(visaId).get();
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
-        if(visaApplicationsRepository.existsById(visaId)){
-            if(application.getVisaType().equalsIgnoreCase("Asylum")){
-                if(officer.getClearanceLevel()>=1 && officer.getClearanceLevel()<=5){
-                    throw new RuntimeException("Validation Failed...");
-                }
+        if(!visaApplicationsRepository.existsById(visaId)){
+            throw new RuntimeException("Visa Application With ID "+visaId+" NOT Found...");
+        }
+        if(!officerRepository.existsById(officerId)){
+            throw new RuntimeException("Officer With ID "+officerId+" NOT Found...");
+        }
+        if(application.getVisaType().equalsIgnoreCase("Asylum")){
+            if(officer.getClearanceLevel()!=4 || officer.getClearanceLevel()!=5){
+                throw new RuntimeException("Validation Failed...");
             }
         }
         application.setHandlingOfficer(officer);
         return visaApplicationsRepository.save(application);
     }
 
-    public VisaApplications processVisa(Long visaId, String newStatus, String notes){}*/
-
+    public VisaApplications processVisa(Long visaId, String newStatus, String notes){
+        VisaApplications applications=visaApplicationsRepository.findById(visaId).get();
+        if(applications.getId()==visaId){
+            applications.setStatus("APPROVED");
+            applications.setOfficerNotes(notes);
+        }
+        return visaApplicationsRepository.save(applications);
+    }
 }
