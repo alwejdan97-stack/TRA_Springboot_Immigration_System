@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AsylumSeeker extends Applicant {
-    private String countryOfOrigin;
-    private String sponsorOrganization;
+public class BorderControlOffice extends ImmegrationOfficer{
+    private String assignedCheckPoint;
+    private Boolean k9UnitAssigned;
 }
