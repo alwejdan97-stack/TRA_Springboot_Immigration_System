@@ -23,7 +23,6 @@ public class VisaApplications {
 
     @ManyToOne
     @JoinColumn(name = "officer_id")
-
     private ImmigrationOfficer handlingOfficer;
 
     @ManyToOne
