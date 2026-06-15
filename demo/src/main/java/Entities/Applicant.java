@@ -23,5 +23,5 @@ public class Applicant extends Person{
     private List<VisaApplications> visApplicationsList;
 
     @OneToMany
-    private List<Interviews> interviewsListnterviews;
+    private List<Interview> interviews;
 }
