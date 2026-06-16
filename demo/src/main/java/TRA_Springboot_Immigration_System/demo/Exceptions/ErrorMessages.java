@@ -10,5 +10,7 @@ public class ErrorMessages {
     public static String INTERVIEW_NOT_FOUND = "Interview Not Found";
 
     public static String DOUBLE_BOOKED_OFFICER="Officer Is Double-Booked!";
+    public static String OFFICER_NOT_FOUND = "Officer Not Found";
+
 
 }

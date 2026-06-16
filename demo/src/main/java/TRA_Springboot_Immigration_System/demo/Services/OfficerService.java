@@ -2,6 +2,8 @@ package TRA_Springboot_Immigration_System.demo.Services;
 
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationCenter;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
+import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
 import TRA_Springboot_Immigration_System.demo.Repositories.CenterRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class OfficerService {
     }
 
     //update the rank and clearance level
-    public ImmigrationOfficer promoteOfficer(Long officerId, String newRank, int newClearanceLevel)throws RuntimeException{
+    public ImmigrationOfficer promoteOfficer(Long officerId, String newRank, int newClearanceLevel){
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
         if(officer.getId()==officerId){
             if(newClearanceLevel>=1 && newClearanceLevel<=5){
@@ -31,7 +33,7 @@ public class OfficerService {
                 return officerRepository.save(officer);
             }
         }
-        throw new RuntimeException("Officer ID NOT Found...");
+        throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
     }
 
     //changes the officer assigned center
@@ -42,21 +44,21 @@ public class OfficerService {
             officer.setId(newCenterId);
             return officerRepository.save(officer);
         }
-        throw new RuntimeException("Officer ID NOT Found...");
+        throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
     }
 
-    public List<ImmigrationOfficer> findByRank(String rank)throws RuntimeException{
+    public List<ImmigrationOfficer> findByRank(String rank){
         if(rank!=null || !rank.isEmpty()){
             return officerRepository.findByRank(rank);
         }
-        throw new RuntimeException("Invalid Data...");
+        throw OfficerException.badRequest(ErrorMessages.INVALID_DATA);
     }
 
     public List<ImmigrationOfficer> findByRank(String rank, int minimumClearanceLevel){
         if(rank!=null || !rank.isEmpty()){
             return officerRepository.findByRank(rank,minimumClearanceLevel);
         }
-        throw new RuntimeException("Invalid Data...");
+        throw OfficerException.badRequest(ErrorMessages.INVALID_DATA);
     }
 
 }

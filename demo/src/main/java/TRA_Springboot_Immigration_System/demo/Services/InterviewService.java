@@ -7,6 +7,7 @@ import TRA_Springboot_Immigration_System.demo.Entities.Interview;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
 import TRA_Springboot_Immigration_System.demo.Exceptions.InterviewException;
+import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.InterviewRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
@@ -46,7 +47,7 @@ public class InterviewService {
             interview.setStatus("SCHEDULE");
             return interviewRepository.save(interview);
         }else{
-            throw InterviewException.badRequest(ErrorMessages.DOUBLE_BOOKED_OFFICER);
+            throw OfficerException.badRequest(ErrorMessages.DOUBLE_BOOKED_OFFICER);
         }
     }
 
