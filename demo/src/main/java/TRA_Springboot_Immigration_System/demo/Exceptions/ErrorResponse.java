@@ -26,7 +26,6 @@ public class ErrorResponse {
         this.path = path;
     }
 
-    public ErrorResponse(){
-        super();
+    public ErrorResponse(HttpStatus httpStatus, int value, String internalServerError, String s, String replace) {
     }
 }

@@ -8,24 +8,20 @@ public class ApplicantException extends RuntimeException {
 
     public ApplicantException(String message) {
         super(message);
-    }
-
-    public CourseException(String message) {
-        super(message);
         this.status = HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
-    public CourseException(HttpStatus status, String message) {
+    public ApplicantException(HttpStatus status, String message) {
         super(message);
         this.status = status;
     }
 
-    public static CourseException notFound(Integer id) {
-        return new CourseException(HttpStatus.NOT_FOUND, "Course with ID " + id + " was not found.");
+    public static ApplicantException notFound(Integer id) {
+        return new ApplicantException(HttpStatus.NOT_FOUND, "Applicant With ID " + id + " Was NOT Found.");
     }
 
-    public static CourseException badRequest(String message) {
-        return new CourseException(HttpStatus.BAD_REQUEST, message);
+    public static ApplicantException badRequest(String message) {
+        return new ApplicantException(HttpStatus.BAD_REQUEST, message);
     }
 
     public HttpStatus getStatus() {
