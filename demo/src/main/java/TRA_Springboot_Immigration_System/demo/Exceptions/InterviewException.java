@@ -16,7 +16,7 @@ public class InterviewException extends RuntimeException {
         this.status = status;
     }
 
-    public static InterviewException notFound(Integer id) {
+    public static InterviewException notFound(Long id) {
         return new InterviewException(HttpStatus.NOT_FOUND, "Interview With ID " + id + " Was NOT Found.");
     }
 

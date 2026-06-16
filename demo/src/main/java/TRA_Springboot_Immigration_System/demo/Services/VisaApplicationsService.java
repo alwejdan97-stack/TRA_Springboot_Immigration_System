@@ -3,6 +3,10 @@ package TRA_Springboot_Immigration_System.demo.Services;
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
 import TRA_Springboot_Immigration_System.demo.Entities.VisaApplications;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
+import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
+import TRA_Springboot_Immigration_System.demo.Exceptions.VisaApplicationException;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.VisaApplicationsRepository;
@@ -31,7 +35,8 @@ public class VisaApplicationsService {
             application.setApplicant(applicant);
             application.setVisaType(visaType);
         }else{
-            throw new RuntimeException("Applicant With ID "+applicantId+ " NOT Found...");
+            //throw new RuntimeException(ErrorMessages.APPLICANT_NOT_FOUND);
+            throw ApplicantException.notFound(applicantId);
 
         }
         if(applicant.getCriminalRecord()==true){
@@ -47,14 +52,16 @@ public class VisaApplicationsService {
         VisaApplications application=visaApplicationsRepository.findById(visaId).get();
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
         if(!visaApplicationsRepository.existsById(visaId)){
-            throw new RuntimeException("Visa Application With ID "+visaId+" NOT Found...");
+            //throw VisaApplicationException.badRequest(ErrorMessages.VISA_APPLICATION_NOT_FOUND);
+            throw VisaApplicationException.notFound(visaId);
         }
         if(!officerRepository.existsById(officerId)){
-            throw new RuntimeException("Officer With ID "+officerId+" NOT Found...");
+            //throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+            throw OfficerException.notFound(officerId);
         }
         if(application.getVisaType().equalsIgnoreCase("Asylum")){
             if(officer.getClearanceLevel()!=4 || officer.getClearanceLevel()!=5){
-                throw new RuntimeException("Validation Failed...");
+                throw OfficerException.badRequest(ErrorMessages.FAILED_VALIDATION);
             }
         }
         application.setHandlingOfficer(officer);
@@ -66,6 +73,8 @@ public class VisaApplicationsService {
         if(applications.getId()==visaId){
             applications.setStatus("APPROVED");
             applications.setOfficerNotes(notes);
+        }else{
+            throw VisaApplicationException.notFound(visaId);
         }
         return visaApplicationsRepository.save(applications);
     }

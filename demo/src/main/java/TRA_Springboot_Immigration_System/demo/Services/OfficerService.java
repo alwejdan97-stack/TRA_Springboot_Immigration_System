@@ -33,7 +33,9 @@ public class OfficerService {
                 return officerRepository.save(officer);
             }
         }
-        throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+        //throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+        throw OfficerException.notFound(officerId);
+
     }
 
     //changes the officer assigned center
@@ -44,7 +46,8 @@ public class OfficerService {
             officer.setId(newCenterId);
             return officerRepository.save(officer);
         }
-        throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+        //throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+        throw OfficerException.notFound(officerId);
     }
 
     public List<ImmigrationOfficer> findByRank(String rank){

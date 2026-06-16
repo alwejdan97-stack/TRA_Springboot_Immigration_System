@@ -16,7 +16,7 @@ public class ApplicantException extends RuntimeException {
         this.status = status;
     }
 
-    public static ApplicantException notFound(Integer id) {
+    public static ApplicantException notFound(Long id) {
         return new ApplicantException(HttpStatus.NOT_FOUND, "Applicant With ID " + id + " Was NOT Found.");
     }
 

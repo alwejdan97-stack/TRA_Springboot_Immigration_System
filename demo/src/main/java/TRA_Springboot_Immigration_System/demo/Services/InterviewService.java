@@ -33,10 +33,12 @@ public class InterviewService {
         Applicant applicant=applicantRepository.findById(applicantId).get();
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
         if(!officerRepository.existsById(officerId)){
-            throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
+            //throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
+            throw OfficerException.notFound(officerId);
         }
         if(!applicantRepository.existsById(applicantId)){
-            throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
+            //throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
+            throw ApplicantException.notFound(applicantId);
         }
         List<Interview> interviewList=interviewRepository.findByOfficerIdAndInterviewDate(officerId,date);
         if(interviewList.isEmpty()){
@@ -57,6 +59,7 @@ public class InterviewService {
             interview.setStatus("COMPLETE");
             return interviewRepository.save(interview);
         }
-        throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
+        //throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
+        throw InterviewException.notFound(interviewId);
     }
 }

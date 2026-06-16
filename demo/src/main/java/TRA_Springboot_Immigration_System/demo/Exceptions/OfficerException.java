@@ -15,7 +15,7 @@ public class OfficerException extends RuntimeException {
         this.status = status;
     }
 
-    public static OfficerException notFound(Integer id) {
+    public static OfficerException notFound(Long id) {
         return new OfficerException(HttpStatus.NOT_FOUND, "Officer With ID " + id + " Was NOT Found.");
     }
 

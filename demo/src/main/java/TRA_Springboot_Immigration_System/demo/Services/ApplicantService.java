@@ -57,6 +57,7 @@ public class ApplicantService {
                 return applicantRepository.findApplicantById(applicantId);
             }
         }
-        throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
+        //throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
+        throw ApplicantException.notFound(applicantId);
     }
 }

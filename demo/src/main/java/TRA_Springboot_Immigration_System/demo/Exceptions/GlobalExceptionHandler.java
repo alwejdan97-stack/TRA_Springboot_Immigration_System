@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
+import java.util.Date;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends RuntimeException {
@@ -24,9 +25,7 @@ public class GlobalExceptionHandler extends RuntimeException {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(
-            Exception ex, WebRequest request) {
-
+    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
         ErrorResponse errorDetails = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -35,5 +34,53 @@ public class GlobalExceptionHandler extends RuntimeException {
                 request.getDescription(false).replace("uri=", "")
         );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorDetails);
+    }
+
+    @ExceptionHandler(ApplicantException.class)
+    public ResponseEntity<ErrorResponse> handleApplicantException(ApplicantException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        HttpStatus status = exception.getStatus();
+        errorResponse.setStatus(status);
+        errorResponse.setStatusCode(status.value());
+        errorResponse.setError(status.getReasonPhrase());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(InterviewException.class)
+    public ResponseEntity<ErrorResponse> handleInterviewException(InterviewException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        HttpStatus status = exception.getStatus();
+        errorResponse.setStatus(status);
+        errorResponse.setStatusCode(status.value());
+        errorResponse.setError(status.getReasonPhrase());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(OfficerException.class)
+    public ResponseEntity<ErrorResponse> handleOfficerException(OfficerException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        HttpStatus status = exception.getStatus();
+        errorResponse.setStatus(status);
+        errorResponse.setStatusCode(status.value());
+        errorResponse.setError(status.getReasonPhrase());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return ResponseEntity.status(status).body(errorResponse);
+    }
+
+    @ExceptionHandler(VisaApplicationException.class)
+    public ResponseEntity<ErrorResponse> handleVisaApplicationException(VisaApplicationException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        HttpStatus status = exception.getStatus();
+        errorResponse.setStatus(status);
+        errorResponse.setStatusCode(status.value());
+        errorResponse.setError(status.getReasonPhrase());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return ResponseEntity.status(status).body(errorResponse);
     }
 }

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -17,14 +17,14 @@ public class ErrorResponse {
     private String message;
     private String path;
 
-    public ErrorResponse(Date timestamp, int statusCode, HttpStatus status, String error, String message, String path) {
+    /*public ErrorResponse(Date timestamp, int statusCode, HttpStatus status, String error, String message, String path) {
         this.timestamp = timestamp;
         this.statusCode = statusCode;
         this.status = status;
         this.error = error;
         this.message = message;
         this.path = path;
-    }
+    }*/
 
     public ErrorResponse(HttpStatus httpStatus, int value, String internalServerError, String s, String replace) {
     }

@@ -11,6 +11,7 @@ public class ErrorMessages {
 
     public static String DOUBLE_BOOKED_OFFICER="Officer Is Double-Booked!";
     public static String OFFICER_NOT_FOUND = "Officer Not Found";
+    public static String FAILED_VALIDATION="Validation Failed...";
 
-
+    public static String VISA_APPLICATION_NOT_FOUND="Visa Application Not Found";
 }

@@ -16,7 +16,7 @@ public class VisaApplicationException extends RuntimeException {
         this.status = status;
     }
 
-    public static VisaApplicationException notFound(Integer id) {
+    public static VisaApplicationException notFound(Long id) {
         return new VisaApplicationException(HttpStatus.NOT_FOUND, "Visa Application With ID " + id + " Was NOT Found.");
     }
 
