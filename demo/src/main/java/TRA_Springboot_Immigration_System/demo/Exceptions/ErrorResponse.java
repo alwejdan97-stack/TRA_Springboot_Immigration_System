@@ -1,9 +1,14 @@
 package TRA_Springboot_Immigration_System.demo.Exceptions;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import java.sql.Date;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ErrorResponse {
     private Date timestamp;
     private int statusCode;
@@ -19,5 +24,9 @@ public class ErrorResponse {
         this.error = error;
         this.message = message;
         this.path = path;
+    }
+
+    public ErrorResponse(){
+        super();
     }
 }
