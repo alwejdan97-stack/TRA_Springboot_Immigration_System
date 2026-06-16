@@ -1,4 +1,14 @@
 package TRA_Springboot_Immigration_System.demo.Exceptions;
 
+import org.springframework.http.HttpStatus;
+import java.sql.Date;
+
+
 public class ErrorResponse {
+    private Date timestamp;
+    private int statusCode;
+    private HttpStatus status;
+    private String error;
+    private String message;
+    private String path;
 }
