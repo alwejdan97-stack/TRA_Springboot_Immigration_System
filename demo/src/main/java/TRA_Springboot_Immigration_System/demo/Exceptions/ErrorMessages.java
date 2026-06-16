@@ -1,8 +1,14 @@
 package TRA_Springboot_Immigration_System.demo.Exceptions;
 
 public class ErrorMessages {
-    public static String COURSE_NOT_FOUND = "Course Not Found";
-    public static String COURSE_INVALID_DATA = "Course data is not valid";
-    public static String COURSE_ID_NULL = "Course id can not be null";
-    public static String COURSE_NAME_CANNOT_BE_SAME_AS_PREVIOUS = "New Course name can not be same as existing course name";
+    public static String APPLICANT_NOT_FOUND = "Applicant Not Found";
+    public static String APPLICANT_ID_NULL = "Applicant ID Can't Be Null";
+    public static String APPLICANT_NAME_CANNOT_BE_SAME_AS_PREVIOUS = "Applicant Name Is Already Exist...";
+
+    public static String INVALID_DATA = "Data Entry Is NOT Valid";
+
+    public static String INTERVIEW_NOT_FOUND = "Interview Not Found";
+
+    public static String DOUBLE_BOOKED_OFFICER="Officer Is Double-Booked!";
+
 }

@@ -4,6 +4,9 @@ package TRA_Springboot_Immigration_System.demo.Services;
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
 import TRA_Springboot_Immigration_System.demo.Entities.Interview;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
+import TRA_Springboot_Immigration_System.demo.Exceptions.InterviewException;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.InterviewRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
@@ -29,10 +32,10 @@ public class InterviewService {
         Applicant applicant=applicantRepository.findById(applicantId).get();
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
         if(!officerRepository.existsById(officerId)){
-            throw new RuntimeException("Officer With ID "+officerId+" NOT Found...");
+            throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
         }
         if(!applicantRepository.existsById(applicantId)){
-            throw new RuntimeException("Applicant With ID "+applicantId+" NOT Found...");
+            throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
         }
         List<Interview> interviewList=interviewRepository.findByOfficerIdAndInterviewDate(officerId,date);
         if(interviewList.isEmpty()){
@@ -43,7 +46,7 @@ public class InterviewService {
             interview.setStatus("SCHEDULE");
             return interviewRepository.save(interview);
         }else{
-            throw new RuntimeException("Officer is double-booked!");
+            throw InterviewException.badRequest(ErrorMessages.DOUBLE_BOOKED_OFFICER);
         }
     }
 
@@ -53,6 +56,6 @@ public class InterviewService {
             interview.setStatus("COMPLETE");
             return interviewRepository.save(interview);
         }
-        throw new RuntimeException("Interview With ID "+interviewId+" NOT Found...");
+        throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
     }
 }

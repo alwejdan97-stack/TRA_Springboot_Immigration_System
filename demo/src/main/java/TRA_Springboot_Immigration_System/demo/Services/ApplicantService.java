@@ -2,6 +2,8 @@ package TRA_Springboot_Immigration_System.demo.Services;
 
 
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
+import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,17 @@ public class ApplicantService {
     }
 
     public Applicant saveApplicant(Applicant applicant){
+        if(applicant==null ||(applicant.getFirstName()==null&&applicant.getLastName()==null)){
+            throw ApplicantException.badRequest(ErrorMessages.INVALID_DATA);
+        }
+        applicant.setCriminalRecord(true);
         return applicantRepository.save(applicant);
     }
 
     //create and save a new applicant object from strings
-    public List<Applicant> saveApplicant(String firstName, String lastName, String passportNumber, String nationality)throws RuntimeException{
+    public List<Applicant> saveApplicant(String firstName, String lastName, String passportNumber, String nationality){
         if(passportNumber==null || passportNumber.isEmpty()){
-            throw new RuntimeException("Passport Number Can't be Null");
+            throw ApplicantException.badRequest(ErrorMessages.INVALID_DATA);
         }
         for(Applicant a:applicants){
             if(!applicantRepository.existFirstNameLastName(firstName,lastName)){
@@ -37,20 +43,20 @@ public class ApplicantService {
                 applicantRepository.save(a);
             }
             else{
-                throw new RuntimeException("Applicant Name is Already Exist...");
+                throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NAME_CANNOT_BE_SAME_AS_PREVIOUS);
             }
         }
         return applicants;
     }
 
     //find applicant using criminalRecord
-    public Applicant flagCriminalRecord(Long applicantId)throws RuntimeException{
+    public Applicant flagCriminalRecord(Long applicantId){
         for(Applicant a:applicants){
             if(applicantRepository.existsById(applicantId)){
                 a.setCriminalRecord(true);
                 return applicantRepository.findApplicantById(applicantId);
             }
         }
-        throw new RuntimeException("Applicant With ID "+applicantId+" NOT Found...");
+        throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
     }
 }
