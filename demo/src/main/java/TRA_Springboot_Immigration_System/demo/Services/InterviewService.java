@@ -11,6 +11,7 @@ import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.InterviewRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,5 +62,19 @@ public class InterviewService {
         }
         //throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
         throw InterviewException.notFound(interviewId);
+    }
+
+    public Interview cancelInterview(Long interviewId){
+        Interview interview=interviewRepository.findById(interviewId).get();
+        if(interviewRepository.existsById(interviewId)){
+            interview.setStatus("CANCEL");
+            return interviewRepository.save(interview);
+        }
+        //throw InterviewException.badRequest(ErrorMessages.INTERVIEW_NOT_FOUND);
+        throw InterviewException.notFound(interviewId);
+    }
+
+    public List<Interview> getOfficerSchedule(Long officerId, String date){
+        return interviewRepository.findByOfficerIdAndInterviewDate(officerId,date);
     }
 }
