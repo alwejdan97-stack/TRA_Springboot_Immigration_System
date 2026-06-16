@@ -1,7 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.DTO;
 
-import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
-import TRA_Springboot_Immigration_System.demo.Entities.VisaApplications;
+import TRA_Springboot_Immigration_System.demo.Entities.VisaApplication;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +15,7 @@ public class VisaApplicationDTO {
     private String status;
     private String officerNotes;
 
-    public static VisaApplicationDTO convertToDTO(VisaApplications entity) {
+    public static VisaApplicationDTO convertToDTO(VisaApplication entity) {
         VisaApplicationDTO dto = new VisaApplicationDTO();
         dto.setId(entity.getId());
         dto.setVisaType(entity.getVisaType());
@@ -25,9 +24,9 @@ public class VisaApplicationDTO {
         return dto;
     }
 
-    public static List<VisaApplicationDTO> convertToDTO(List<VisaApplications> entities) {
+    public static List<VisaApplicationDTO> convertToDTO(List<VisaApplication> entities) {
         List<VisaApplicationDTO> dtos = new ArrayList<>();
-        for (VisaApplications entity : entities) {
+        for (VisaApplication entity : entities) {
             dtos.add(convertToDTO(entity));
         }
         return dtos;

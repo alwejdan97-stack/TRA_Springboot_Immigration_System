@@ -2,7 +2,7 @@ package TRA_Springboot_Immigration_System.demo.Services;
 
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
-import TRA_Springboot_Immigration_System.demo.Entities.VisaApplications;
+import TRA_Springboot_Immigration_System.demo.Entities.VisaApplication;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
 import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
@@ -20,6 +20,7 @@ public class VisaApplicationsService {
     VisaApplicationsRepository visaApplicationsRepository;
     ApplicantRepository applicantRepository;
     OfficerRepository officerRepository;
+    List<VisaApplication> visaApplications;
 
     @Autowired
     public VisaApplicationsService(VisaApplicationsRepository visaApplicationsRepository, ApplicantRepository applicantRepository, OfficerRepository officerRepository) {
@@ -28,9 +29,9 @@ public class VisaApplicationsService {
         this.officerRepository = officerRepository;
     }
 
-    public VisaApplications submissionApplication(Long applicantId, String visaType)throws RuntimeException{
+    public VisaApplication submissionApplication(Long applicantId, String visaType){
         Applicant applicant=applicantRepository.findById(applicantId).get();
-        VisaApplications application=new VisaApplications();
+        VisaApplication application=new VisaApplication();
         if(applicant.getId()!=applicantId){
             application.setApplicant(applicant);
             application.setVisaType(visaType);
@@ -48,8 +49,8 @@ public class VisaApplicationsService {
         return visaApplicationsRepository.save(application);
     }
 
-    public VisaApplications assignedOfficer(Long visaId, Long officerId){
-        VisaApplications application=visaApplicationsRepository.findById(visaId).get();
+    public VisaApplication assignedOfficer(Long visaId, Long officerId){
+        VisaApplication application=visaApplicationsRepository.findById(visaId).get();
         ImmigrationOfficer officer=officerRepository.findById(officerId).get();
         if(!visaApplicationsRepository.existsById(visaId)){
             //throw VisaApplicationException.badRequest(ErrorMessages.VISA_APPLICATION_NOT_FOUND);
@@ -68,8 +69,8 @@ public class VisaApplicationsService {
         return visaApplicationsRepository.save(application);
     }
 
-    public VisaApplications processVisa(Long visaId, String newStatus, String notes){
-        VisaApplications applications=visaApplicationsRepository.findById(visaId).get();
+    public VisaApplication processVisa(Long visaId, String newStatus, String notes){
+        VisaApplication applications=visaApplicationsRepository.findById(visaId).get();
         if(applications.getId()==visaId){
             applications.setStatus("APPROVED");
             applications.setOfficerNotes(notes);
@@ -78,4 +79,15 @@ public class VisaApplicationsService {
         }
         return visaApplicationsRepository.save(applications);
     }
+
+    public List<VisaApplication> getVisasByStatus(String status){
+        List<VisaApplication> visas = visaApplicationsRepository.findByVisaApplicantStatus(status);
+        return visas;
+    }
+
+    public List<VisaApplication> getVisasByApplicantId(Long applicantId){
+        List<VisaApplication> visas = visaApplicationsRepository.getVisaByApplicantId(applicantId);
+        return visas;
+    }
+
 }

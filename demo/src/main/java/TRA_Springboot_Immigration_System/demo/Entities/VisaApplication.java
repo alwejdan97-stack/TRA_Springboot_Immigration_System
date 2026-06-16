@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "VisaApplications")
-public class VisaApplications {
+public class VisaApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
