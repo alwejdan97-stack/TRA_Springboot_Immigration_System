@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("applicant")
+@RequestMapping("api/applicant")
 public class ApplicantController {
     ApplicantService applicantService;
     @Autowired
@@ -18,7 +18,7 @@ public class ApplicantController {
         this.applicantService = applicantService;
     }
 
-    @PostMapping
+    @PostMapping("/registerApplicant")
     public ResponseEntity<Applicant> registerApplicant(@RequestBody Applicant applicant) {
         return ResponseEntity.ok(applicantService.saveApplicant(applicant));
     }
@@ -28,7 +28,7 @@ public class ApplicantController {
         return ResponseEntity.ok(applicantService.registerAsylumSeeker(seeker));
     }
 
-    @GetMapping
+    @GetMapping("/getAllApplicants")
     public ResponseEntity<List<Applicant>> getAllApplicants() {
         return ResponseEntity.ok(applicantService.getAllApplicants());
     }
@@ -38,7 +38,7 @@ public class ApplicantController {
         return ResponseEntity.ok(applicantService.findApplicantsByNationality(nationality));
     }
 
-
+    @PutMapping("/flag/{id}")
     public ResponseEntity<Applicant> flagCriminalRecord(@PathVariable Long id) {
         return ResponseEntity.ok(applicantService.flagCriminalRecord(id));
     }
