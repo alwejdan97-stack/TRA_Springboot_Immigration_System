@@ -14,4 +14,9 @@ public class ErrorMessages {
     public static String FAILED_VALIDATION="Validation Failed...";
 
     public static String VISA_APPLICATION_NOT_FOUND="Visa Application Not Found";
+
+    public static String CENTER_NOT_FOUND = "Center Not Found";
+    public static String CENTER_NAME_NOT_FOUND = "Center Name Not Found";
+
+
 }

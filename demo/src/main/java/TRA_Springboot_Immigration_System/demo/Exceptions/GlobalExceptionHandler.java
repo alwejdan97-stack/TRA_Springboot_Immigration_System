@@ -83,4 +83,16 @@ public class GlobalExceptionHandler extends RuntimeException {
         errorResponse.setTimestamp(new Date());
         return ResponseEntity.status(status).body(errorResponse);
     }
+
+    @ExceptionHandler(CenterException.class)
+    public ResponseEntity<ErrorResponse> handleVisaApplicationException(CenterException exception, WebRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        HttpStatus status = exception.getStatus();
+        errorResponse.setStatus(status);
+        errorResponse.setStatusCode(status.value());
+        errorResponse.setError(status.getReasonPhrase());
+        errorResponse.setMessage(exception.getMessage());
+        errorResponse.setTimestamp(new Date());
+        return ResponseEntity.status(status).body(errorResponse);
+    }
 }

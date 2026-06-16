@@ -2,6 +2,7 @@ package TRA_Springboot_Immigration_System.demo.Services;
 
 
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
+import TRA_Springboot_Immigration_System.demo.Entities.AsylumSeeker;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ApplicantException;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
 import TRA_Springboot_Immigration_System.demo.Repositories.ApplicantRepository;
@@ -49,7 +50,6 @@ public class ApplicantService {
         return applicants;
     }
 
-    //find applicant using criminalRecord
     public Applicant flagCriminalRecord(Long applicantId){
         for(Applicant a:applicants){
             if(applicantRepository.existsById(applicantId)){
@@ -57,7 +57,18 @@ public class ApplicantService {
                 return applicantRepository.findApplicantById(applicantId);
             }
         }
-        //throw ApplicantException.badRequest(ErrorMessages.APPLICANT_NOT_FOUND);
         throw ApplicantException.notFound(applicantId);
+    }
+
+    public AsylumSeeker registerAsylumSeeker(AsylumSeeker seeker) {
+        return applicantRepository.save(seeker);
+    }
+
+    public List<Applicant> getAllApplicants() {
+        return applicantRepository.findAll();
+    }
+
+    public List<Applicant> findApplicantsByNationality(String nationality) {
+        return applicantRepository.findByNationality(nationality);
     }
 }
