@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Services;
 
+import TRA_Springboot_Immigration_System.demo.Entities.BorderControlOffice;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationCenter;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
@@ -7,7 +8,10 @@ import TRA_Springboot_Immigration_System.demo.Exceptions.OfficerException;
 import TRA_Springboot_Immigration_System.demo.Repositories.CenterRepository;
 import TRA_Springboot_Immigration_System.demo.Repositories.OfficerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -17,10 +21,29 @@ public class OfficerService {
     CenterRepository centerRepository;
 
     @Autowired
-
-    public OfficerService(OfficerRepository officerRepository, CenterRepository centerRepository) {
+    public OfficerService(OfficerRepository officerRepository, CenterRepository centerRepository){
         this.officerRepository = officerRepository;
         this.centerRepository = centerRepository;
+    }
+
+    public ImmigrationOfficer hireStandardOfficer(ImmigrationOfficer officer){
+        return officerRepository.save(officer);
+    }
+
+    public ImmigrationOfficer hireBorderOfficer(BorderControlOffice borderRequest){
+        BorderControlOffice borderOfficer=new BorderControlOffice();
+        borderOfficer.setFirstName(borderRequest.getFirstName());
+        borderOfficer.setLastName(borderRequest.getLastName());
+        borderOfficer.setRank(borderRequest.getRank());
+        return officerRepository.save(borderOfficer);
+    }
+
+    public ImmigrationOfficer getOfficerDetailsById(Long id){
+        ImmigrationOfficer officer=officerRepository.findById(id).get();
+        if(officer.getId()==id){
+            return officer;
+        }
+        throw OfficerException.notFound(id);
     }
 
     //update the rank and clearance level
@@ -35,7 +58,6 @@ public class OfficerService {
         }
         //throw OfficerException.badRequest(ErrorMessages.OFFICER_NOT_FOUND);
         throw OfficerException.notFound(officerId);
-
     }
 
     //changes the officer assigned center
