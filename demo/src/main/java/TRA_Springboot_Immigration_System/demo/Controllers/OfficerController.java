@@ -22,24 +22,28 @@ public class OfficerController {
         this.officerService=officerService;
     }
 
-    @PostMapping("hireStandardOfficer")
+    @PostMapping("/hireStandardOfficer")
     public ResponseEntity<ImmigrationOfficer> hireStandardOfficer(@RequestBody ImmigrationOfficer officer) {
         return ResponseEntity.ok(officerService.hireStandardOfficer(officer));
     }
 
+    @PostMapping("/hireBorderOfficer")
     public ResponseEntity<ImmigrationOfficer> hireBorderOfficer(@RequestBody BorderControlOffice borderRequest){
         return ResponseEntity.ok(officerService.hireBorderOfficer(borderRequest));
     }
 
+    @GetMapping("/getOfficerDetailsById/{id}")
     public ResponseEntity<ImmigrationOfficer> getOfficerDetailsById(@PathVariable Long id){
         return ResponseEntity.ok(officerService.getOfficerDetailsById(id));
     }
 
+    @PostMapping("/promoteOfficer/{officerId}")
     public ResponseEntity<ImmigrationOfficer> promoteOfficer(@PathVariable Long officerId, @RequestParam String newRank, @RequestParam int newClearanceLevel){
         return ResponseEntity.ok(officerService.promoteOfficer(officerId,newRank,newClearanceLevel));
     }
 
-    public ResponseEntity<ImmigrationOfficer> transferOfficer(Long officerId,Long newCenterId){
+    @PutMapping("/transferOfficer/{officerId}")
+    public ResponseEntity<ImmigrationOfficer> transferOfficer(@PathVariable Long officerId,@RequestParam Long newCenterId){
         return ResponseEntity.ok(officerService.transferOfficer(officerId,newCenterId));
     }
 
