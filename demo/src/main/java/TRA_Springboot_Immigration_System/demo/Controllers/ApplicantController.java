@@ -25,8 +25,8 @@ public class ApplicantController {
     }
 
     @PostMapping("/asylum")
-    public ResponseEntity<AsylumSeeker> registerAsylumSeeker(@RequestBody AsylumSeeker seeker) {
-        return ResponseEntity.ok(applicantService.registerAsylumSeeker(seeker));
+    public ResponseEntity<ApplicantDTO> registerAsylumSeeker(@RequestBody AsylumSeeker seeker) {
+        return ResponseEntity.ok(ApplicantDTO.convertToDTO(applicantService.registerAsylumSeeker(seeker)));
     }
 
     @GetMapping("/getAllApplicants")
