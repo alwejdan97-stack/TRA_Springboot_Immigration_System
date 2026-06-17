@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Exceptions;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Date;
 
 @RestControllerAdvice
+@AllArgsConstructor
 public class GlobalExceptionHandler extends RuntimeException {
     public GlobalExceptionHandler(String message) {
         super(message);
@@ -85,7 +87,7 @@ public class GlobalExceptionHandler extends RuntimeException {
     }
 
     @ExceptionHandler(CenterException.class)
-    public ResponseEntity<ErrorResponse> handleVisaApplicationException(CenterException exception, WebRequest request) {
+    public ResponseEntity<ErrorResponse> handleCenterException(CenterException exception, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
         HttpStatus status = exception.getStatus();
         errorResponse.setStatus(status);

@@ -36,7 +36,7 @@ public class ApplicantService {
             throw ApplicantException.badRequest(ErrorMessages.INVALID_DATA);
         }
         for(Applicant a:applicants){
-            if(!applicantRepository.existsByFirstLastName(firstName,lastName)){
+            if(!applicantRepository.existsByFirstNameAndLastName(firstName,lastName)){
                 a.setFirstName(firstName);
                 a.setLastName(lastName);
                 a.setPassportNumber(passportNumber);

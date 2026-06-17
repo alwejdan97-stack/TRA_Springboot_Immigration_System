@@ -27,12 +27,12 @@ public class CenterServer {
         if(!centerRepository.existsById(centerId)){
             throw CenterException.notFound(centerId);
         }
-        return centerRepository.findByCenterId(centerId);
+        return center;
     }
     public List<ImmigrationCenter> findByCenterName(String centerName){
-        List<ImmigrationCenter> centers=centerRepository.findByCenterName(centerName);
+        List<ImmigrationCenter> centers=centerRepository.findByName(centerName);
         if(!centers.isEmpty()){
-            return centerRepository.findByCenterName(centerName);
+            return centerRepository.findByName(centerName);
         }
         throw CenterException.badRequest(ErrorMessages.CENTER_NAME_NOT_FOUND);
     }

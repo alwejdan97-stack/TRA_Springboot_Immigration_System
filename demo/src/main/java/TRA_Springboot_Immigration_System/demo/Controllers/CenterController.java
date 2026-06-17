@@ -30,8 +30,8 @@ public class CenterController {
         return ResponseEntity.ok(CenterDTO.convertToDTO(centerServer.findByCenterId(centerId)));
     }
 
-    @GetMapping("/findByCenterName")
-    public ResponseEntity<List<CenterDTO>> findByCenterName(@RequestParam String centerName){
+    @GetMapping("/findByName")
+    public ResponseEntity<List<CenterDTO>> findByName(@RequestParam String centerName){
        return ResponseEntity.ok(CenterDTO.convertToDTO(centerServer.findByCenterName(centerName)));
     }
 }

@@ -81,7 +81,7 @@ public class VisaApplicationsService {
     }
 
     public List<VisaApplication> getVisasByStatus(String status){
-        List<VisaApplication> visas = visaApplicationsRepository.findByVisaApplicantStatus(status);
+        List<VisaApplication> visas = visaApplicationsRepository.findByStatus(status);
         return visas;
     }
 

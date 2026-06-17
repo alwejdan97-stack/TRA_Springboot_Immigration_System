@@ -13,5 +13,5 @@ public interface ApplicantRepository extends JpaRepository<Applicant,Long> {
     @Query("SELECT A FROM Applicant A WHERE A.id=:applicantId")
     Applicant findApplicantById(@Param("applicantId") Long applicantId);
 
-    boolean existsByFirstLastName(String firstName, String lastName);
+    boolean existsByFirstNameAndLastName(String firstName, String lastName);
 }

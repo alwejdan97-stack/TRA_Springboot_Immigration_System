@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface OfficerRepository extends JpaRepository<ImmigrationOfficer,Long> {
-    List<ImmigrationOfficer> findByOfficerId(Long officerId);
+    //List<ImmigrationOfficer> findByOfficerId(Long officerId);
     List<ImmigrationOfficer> findByRank(String badgeNumber);
     List<ImmigrationOfficer> findByRank(String badgeNumber, int clearanceLevel);
 }
