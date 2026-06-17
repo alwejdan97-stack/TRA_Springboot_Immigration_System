@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Controllers;
 
+import TRA_Springboot_Immigration_System.demo.DTO.VisaApplicationDTO;
 import TRA_Springboot_Immigration_System.demo.Entities.VisaApplication;
 import TRA_Springboot_Immigration_System.demo.Services.VisaApplicationsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +21,28 @@ public class VisaApplicationController {
     }
 
     @PostMapping("/submissionApplication")
-    public ResponseEntity<VisaApplication> submissionApplication(@PathVariable Long applicantId, @RequestParam String visaType){
+    public ResponseEntity<VisaApplicationDTO> submissionApplication(@PathVariable Long applicantId, @RequestParam String visaType){
         VisaApplication newVisa=visaApplicationsService.submissionApplication(applicantId,visaType);
-        return new ResponseEntity<>(newVisa, HttpStatus.CREATED);
+        return ResponseEntity.ok(VisaApplicationDTO.convertToDTO(newVisa));
     }
 
     @PutMapping("/assignedOfficer/{visaId}/{officerId}")
-    public ResponseEntity<VisaApplication> assignedOfficer(@PathVariable Long visaId, @PathVariable Long officerId){
-        return ResponseEntity.ok(visaApplicationsService.assignedOfficer(visaId, officerId));
+    public ResponseEntity<VisaApplicationDTO> assignedOfficer(@PathVariable Long visaId, @PathVariable Long officerId){
+        return ResponseEntity.ok(VisaApplicationDTO.convertToDTO(visaApplicationsService.assignedOfficer(visaId, officerId)));
     }
 
     @PutMapping("/processVisa/{visaId}")
-    public ResponseEntity<VisaApplication> processVisa(@PathVariable Long visaId, @RequestParam String newStatus, @RequestParam String notes){
-        return ResponseEntity.ok(visaApplicationsService.processVisa(visaId, newStatus, notes));
+    public ResponseEntity<VisaApplicationDTO> processVisa(@PathVariable Long visaId, @RequestParam String newStatus, @RequestParam String notes){
+        return ResponseEntity.ok(VisaApplicationDTO.convertToDTO(visaApplicationsService.processVisa(visaId, newStatus, notes)));
     }
 
     @GetMapping("/getVisasByStatus/{status}")
-    public ResponseEntity<List<VisaApplication>> getVisasByStatus(@PathVariable String status) {
-        return ResponseEntity.ok(visaApplicationsService.getVisasByStatus(status));
+    public ResponseEntity<List<VisaApplicationDTO>> getVisasByStatus(@PathVariable String status) {
+        return ResponseEntity.ok(VisaApplicationDTO.convertToDTO(visaApplicationsService.getVisasByStatus(status)));
     }
 
     @GetMapping("/getVisasByApplicant/{applicantId}")
-    public ResponseEntity<List<VisaApplication>> getVisasByApplicant(@PathVariable Long applicantId){
-        return ResponseEntity.ok(visaApplicationsService.getVisasByApplicantId(applicantId));
+    public ResponseEntity<List<VisaApplicationDTO>> getVisasByApplicant(@PathVariable Long applicantId){
+        return ResponseEntity.ok(VisaApplicationDTO.convertToDTO(visaApplicationsService.getVisasByApplicantId(applicantId)));
     }
 }

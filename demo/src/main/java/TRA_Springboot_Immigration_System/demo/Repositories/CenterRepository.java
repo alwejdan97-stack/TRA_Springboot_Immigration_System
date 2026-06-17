@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CenterRepository extends JpaRepository<ImmigrationCenter,Long> {
-    List<ImmigrationCenter> findByCenterId(Long centerId);
+    ImmigrationCenter findByCenterId(Long centerId);
     List<ImmigrationCenter> findByCenterName(String centerName);
 }

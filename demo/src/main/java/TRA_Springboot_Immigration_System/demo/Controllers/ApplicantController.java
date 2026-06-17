@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Controllers;
 
+import TRA_Springboot_Immigration_System.demo.DTO.ApplicantDTO;
 import TRA_Springboot_Immigration_System.demo.Entities.Applicant;
 import TRA_Springboot_Immigration_System.demo.Entities.AsylumSeeker;
 import TRA_Springboot_Immigration_System.demo.Services.ApplicantService;
@@ -19,8 +20,8 @@ public class ApplicantController {
     }
 
     @PostMapping("/registerApplicant")
-    public ResponseEntity<Applicant> registerApplicant(@RequestBody Applicant applicant) {
-        return ResponseEntity.ok(applicantService.saveApplicant(applicant));
+    public ResponseEntity<ApplicantDTO> registerApplicant(@RequestBody Applicant applicant) {
+        return ResponseEntity.ok(ApplicantDTO.convertToDTO(applicantService.saveApplicant(applicant)));
     }
 
     @PostMapping("/asylum")
@@ -29,17 +30,17 @@ public class ApplicantController {
     }
 
     @GetMapping("/getAllApplicants")
-    public ResponseEntity<List<Applicant>> getAllApplicants() {
-        return ResponseEntity.ok(applicantService.getAllApplicants());
+    public ResponseEntity<List<ApplicantDTO>> getAllApplicants() {
+        return ResponseEntity.ok(ApplicantDTO.convertToDTO(applicantService.getAllApplicants()));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Applicant>> findApplicantsByNationality(@RequestParam String nationality) {
-        return ResponseEntity.ok(applicantService.findApplicantsByNationality(nationality));
+    public ResponseEntity<List<ApplicantDTO>> findApplicantsByNationality(@RequestParam String nationality) {
+        return ResponseEntity.ok(ApplicantDTO.convertToDTO(applicantService.findApplicantsByNationality(nationality)));
     }
 
     @PutMapping("/flag/{id}")
-    public ResponseEntity<Applicant> flagCriminalRecord(@PathVariable Long id) {
-        return ResponseEntity.ok(applicantService.flagCriminalRecord(id));
+    public ResponseEntity<ApplicantDTO> flagCriminalRecord(@PathVariable Long id) {
+        return ResponseEntity.ok(ApplicantDTO.convertToDTO(applicantService.flagCriminalRecord(id)));
     }
 }

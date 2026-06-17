@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Controllers;
 
+import TRA_Springboot_Immigration_System.demo.DTO.CenterDTO;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationCenter;
 import TRA_Springboot_Immigration_System.demo.Exceptions.CenterException;
 import TRA_Springboot_Immigration_System.demo.Exceptions.ErrorMessages;
@@ -20,17 +21,17 @@ public class CenterController {
     }
 
     @PostMapping("/saveCenter")
-    public ResponseEntity<ImmigrationCenter> saveCenter(@RequestBody ImmigrationCenter center){
-        return ResponseEntity.ok(centerServer.saveCenter(center));
+    public ResponseEntity<CenterDTO> saveCenter(@RequestBody ImmigrationCenter center){
+        return ResponseEntity.ok(CenterDTO.convertToDTO(centerServer.saveCenter(center)));
     }
 
     @GetMapping("/findByCenterId/{centerId}")
-    public ResponseEntity<List<ImmigrationCenter>> findByCenterId(@PathVariable Long centerId){
-        return ResponseEntity.ok(centerServer.findByCenterId(centerId));
+    public ResponseEntity<CenterDTO> findByCenterId(@PathVariable Long centerId){
+        return ResponseEntity.ok(CenterDTO.convertToDTO(centerServer.findByCenterId(centerId)));
     }
 
     @GetMapping("/findByCenterName")
-    public ResponseEntity<List<ImmigrationCenter>> findByCenterName(@RequestParam String centerName){
-       return ResponseEntity.ok(centerServer.findByCenterName(centerName));
+    public ResponseEntity<List<CenterDTO>> findByCenterName(@RequestParam String centerName){
+       return ResponseEntity.ok(CenterDTO.convertToDTO(centerServer.findByCenterName(centerName)));
     }
 }

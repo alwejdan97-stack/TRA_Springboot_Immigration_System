@@ -1,5 +1,6 @@
 package TRA_Springboot_Immigration_System.demo.Controllers;
 
+import TRA_Springboot_Immigration_System.demo.DTO.OfficerDTO;
 import TRA_Springboot_Immigration_System.demo.Entities.BorderControlOffice;
 import TRA_Springboot_Immigration_System.demo.Entities.ImmigrationOfficer;
 import TRA_Springboot_Immigration_System.demo.Repositories.CenterRepository;
@@ -23,28 +24,28 @@ public class OfficerController {
     }
 
     @PostMapping("/hireStandardOfficer")
-    public ResponseEntity<ImmigrationOfficer> hireStandardOfficer(@RequestBody ImmigrationOfficer officer) {
-        return ResponseEntity.ok(officerService.hireStandardOfficer(officer));
+    public ResponseEntity<OfficerDTO> hireStandardOfficer(@RequestBody ImmigrationOfficer officer) {
+        return ResponseEntity.ok(OfficerDTO.convertToDTO(officerService.hireStandardOfficer(officer)));
     }
 
     @PostMapping("/hireBorderOfficer")
-    public ResponseEntity<ImmigrationOfficer> hireBorderOfficer(@RequestBody BorderControlOffice borderRequest){
-        return ResponseEntity.ok(officerService.hireBorderOfficer(borderRequest));
+    public ResponseEntity<OfficerDTO> hireBorderOfficer(@RequestBody BorderControlOffice borderRequest){
+        return ResponseEntity.ok(OfficerDTO.convertToDTO(officerService.hireBorderOfficer(borderRequest)));
     }
 
     @GetMapping("/getOfficerDetailsById/{id}")
-    public ResponseEntity<ImmigrationOfficer> getOfficerDetailsById(@PathVariable Long id){
-        return ResponseEntity.ok(officerService.getOfficerDetailsById(id));
+    public ResponseEntity<OfficerDTO> getOfficerDetailsById(@PathVariable Long id){
+        return ResponseEntity.ok(OfficerDTO.convertToDTO(officerService.getOfficerDetailsById(id)));
     }
 
     @PostMapping("/promoteOfficer/{officerId}")
-    public ResponseEntity<ImmigrationOfficer> promoteOfficer(@PathVariable Long officerId, @RequestParam String newRank, @RequestParam int newClearanceLevel){
-        return ResponseEntity.ok(officerService.promoteOfficer(officerId,newRank,newClearanceLevel));
+    public ResponseEntity<OfficerDTO> promoteOfficer(@PathVariable Long officerId, @RequestParam String newRank, @RequestParam int newClearanceLevel){
+        return ResponseEntity.ok(OfficerDTO.convertToDTO(officerService.promoteOfficer(officerId,newRank,newClearanceLevel)));
     }
 
     @PutMapping("/transferOfficer/{officerId}")
-    public ResponseEntity<ImmigrationOfficer> transferOfficer(@PathVariable Long officerId,@RequestParam Long newCenterId){
-        return ResponseEntity.ok(officerService.transferOfficer(officerId,newCenterId));
+    public ResponseEntity<OfficerDTO> transferOfficer(@PathVariable Long officerId,@RequestParam Long newCenterId){
+        return ResponseEntity.ok(OfficerDTO.convertToDTO(officerService.transferOfficer(officerId,newCenterId)));
     }
 
     /*public ResponseEntity<List<ImmigrationOfficer>> findByRank(String rank){

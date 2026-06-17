@@ -10,8 +10,8 @@ import java.util.List;
 public interface ApplicantRepository extends JpaRepository<Applicant,Long> {
     List<Applicant> findByNationality(String nationality);
 
-    @Query("SELECT A FROM Applicant A WHERE A.id=applicantId")
+    @Query("SELECT A FROM Applicant A WHERE A.id=:applicantId")
     Applicant findApplicantById(@Param("applicantId") Long applicantId);
 
-    boolean existFirstNameLastName(String firstName, String lastName);
+    boolean existsByFirstLastName(String firstName, String lastName);
 }

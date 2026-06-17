@@ -22,7 +22,7 @@ public class CenterServer {
         return centerRepository.save(center);
     }
 
-    public List<ImmigrationCenter> findByCenterId(Long centerId){
+    public ImmigrationCenter findByCenterId(Long centerId){
         ImmigrationCenter center = centerRepository.findById(centerId).get();
         if(!centerRepository.existsById(centerId)){
             throw CenterException.notFound(centerId);
